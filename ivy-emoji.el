@@ -5,7 +5,7 @@
 ;; Author: Gabriele Bozzola <sbozzolator@gmail.com>
 ;; URL: https://github.com/sbozzolo/ivy-emoji.git
 ;; Version: 0.0.1
-;; Package-Requires: ((company-emoji "2.5.2"))
+;; Package-Requires: ((company-emoji "2.5.2") (ivy "0.13.0"))
 ;; Keywords: emoji ivy
 ;; Prefix: ivy-emoji
 
