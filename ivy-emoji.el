@@ -1,4 +1,4 @@
-;;; company-emoji.el --- company-mode backend for emoji
+;;; ivy-emoji.el --- Insert emojis with ivy
 
 ;; Copyright (C) 2020 Gabriele Bozzola
 
