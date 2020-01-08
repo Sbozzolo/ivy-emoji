@@ -29,8 +29,8 @@
 
 (defun ivy-emoji--list-create ()
   "Create list of emojis with the emoji as first character."
-  ;; The output of company-emoji-list-create is a list with elements of the form
-  ;; #(":grinning:" 0 1 (:unicode "😀"))
+  ;; The output of company-emoji-list-create is a list with elements
+  ;; of the form #(":grinning:" 0 1 (:unicode "😀"))
   ;; So we extract the emoji and prepend it to the string
   (mapcar '(lambda (arg)
              (concat
