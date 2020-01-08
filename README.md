@@ -13,7 +13,7 @@ It may be useful to add the following line to the configuration file to ensure
 that Noto Color Emoji is chosen to render emojis.
 
 ``` emacs-lisp
-    (set-fontset-font t 'symbol (font-spec :family "Noto Color Emoji") nil 'prepend)
+(set-fontset-font t 'symbol (font-spec :family "Noto Color Emoji") nil 'prepend)
 ```
 
 ## Usage
