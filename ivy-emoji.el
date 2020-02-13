@@ -1,4 +1,4 @@
-;;; ivy-emoji.el --- Insert emojis with ivy
+;;; ivy-emoji.el --- Insert emojis with ivy -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2020 Gabriele Bozzola
 
@@ -46,8 +46,7 @@ E.g. convert spaces to -, surround with :."
   "Create list of emojis with the emoji as first character.
 This is done by parsing the codepoint ranges.
 
-This function is used to produce the constant ivy-emojis.
-"
+This function is used to produce the constant ivy-emoji-list."
   (let (emoji-list)
     (dolist (range ivy-emoji-codepoint-ranges) ; Loop over different ranges
       (dotimes (i (- (cdr range) (car range))) ; Loop over the codepoints in the range
@@ -72,7 +71,7 @@ is supposed to be used with ivy-emoji--create-list."
   (insert (substring emoji 0 1)))
 
 ;; Create list of emojis using the ranges in the codepoints
-(defconst ivy-emojis (ivy-emoji--create-list)
+(defconst ivy-emoji-list (ivy-emoji--create-list)
   "Cached list of propertized emojis.")
 
 ;;;###autoload
@@ -80,7 +79,7 @@ is supposed to be used with ivy-emoji--create-list."
   "Select an emoji and insert it."
   (interactive)
   (ivy-read "Emoji: "
-            ivy-emojis
+            ivy-emoji-list
             :require-match t
             :action #'ivy-emoji--insert-emoji))
 
