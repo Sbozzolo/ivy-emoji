@@ -4,8 +4,8 @@
 
 ;; Author: Gabriele Bozzola <sbozzolator@gmail.com>
 ;; URL: https://github.com/sbozzolo/ivy-emoji.git
-;; Version: 0.0.1
-;; Package-Requires: ((company-emoji "2.5.2") (ivy "0.13.0"))
+;; Version: 0.1
+;; Package-Requires: ((ivy "0.13.0"))
 ;; Keywords: emoji ivy
 ;; Prefix: ivy-emoji
 
@@ -22,35 +22,58 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-;; This package uses on company-emoji to generate the emoji list
-
 (require 'ivy)
-(require 'company-emoji-list)
 
-(defun ivy-emoji--list-create ()
-  "Create list of emojis with the emoji as first character."
-  ;; The output of company-emoji-list-create is a list with elements
-  ;; of the form #(":grinning:" 0 1 (:unicode "😀"))
-  ;; So we extract the emoji and prepend it to the string
-  (mapcar '(lambda (arg)
-             (concat
-              (get-text-property 0 :unicode arg) ;; Get the emoji
-              " "                                ;; Add space
-              (substring-no-properties arg))     ;; Print the name
-             )
-          (company-emoji-list-create)
+;; The idea of generating the list from codepoint ranges is taken from the
+;; no-emoji package
+(defconst ivy-emoji-codepoint-ranges
+  '((#x1f000 . #x1f9ff))
+  "A list of codepoint ranges (inclusive) that is used to
+generate the list of emoji."
+  )
+
+(defun ivy-emoji---clean-name (name)
+  "Convert NAME to the string that should be shown.
+E.g. convert spaces to -, surround with :."
+  (concat ":" (replace-regexp-in-string " " "-" (downcase name)) ":")
+  )
+
+(defun ivy-emoji--create-list ()
+  "Create list of emojis with the emoji as first character.
+This is done by parsing the codepoint ranges.
+
+This function is used to produce ivy-emojis.
+"
+  (let (emoji-list)
+    (dolist (range ivy-emoji-codepoint-ranges) ;; In case there are multiple ranges
+      (dotimes (i (- (cdr range) (car range))) ;; Loop over the codepoints in the range
+        (let ((codepoint (+ (car range) i)))
+          (let* ((name (get-char-code-property codepoint 'name))
+                 (emoji (with-temp-buffer (insert codepoint) (buffer-substring 1 2)))
+                 )
+            (if name                       ; name could be nil
+                (add-to-list 'emoji-list
+                             (concat emoji " " (ivy-emoji---clean-name name))
+                             )
+              ;; In case the emoji is not available
+              (add-to-list 'emoji-list (concat emoji "NAME NOT AVAILABLE"))
+              )
+            )
           )
+        )
+      )
+    emoji-list ; Return value
+    )
   )
 
 (defun ivy-emoji--insert-emoji (emoji)
   "Insert emoji by extracting the first character. This function
-   is supposed to be used with ivy-emoji--list-create"
+   is supposed to be used with ivy-emoji--create-list"
   (insert (substring emoji 0 1))
   )
 
-
-;; Create list of emojis using company-emoji
-(defconst ivy-emojis (ivy-emoji--list-create)
+;; Create list of emojis using the ranges in the codepoints
+(defconst ivy-emojis (ivy-emoji--create-list)
   "Cached list of propertized emojis.")
 
 ;;;###autoload
@@ -65,4 +88,5 @@
   )
 
 (provide 'ivy-emoji)
+
 ;;; ivy-emoji.el ends here

@@ -2,9 +2,11 @@
 
 Insert emoji in Emacs buffers using the ivy selection framework.
 
-## Dependencies
+## Installation
 
-The package relies on `ivy` and uses `company-emoji` to generate the emoji list.
+
+
+### Dependencies
 
 Emacs has to be able to properly render emojis, so a suitable font is required.
 Noto Color Emoji is reccomended.
