@@ -57,10 +57,10 @@ This function is used to produce the constant ivy-emoji-list."
                                         ; name would be nil
                                         ; Those emoji should not be included
                 (add-to-list 'emoji-list
-                             ; The way we want to format emoji is the following
-                             ; 🌵 :cactus:
-                             ; We will insert the emoji by taking the first character
-                             ; of this string
+                                        ; The way we want to format emoji is the
+                                        ; following 🌵 :cactus:
+                                        ; We will insert the emoji by taking the
+                                        ; first character of this string
                              (concat emoji " " (ivy-emoji---clean-name name))))))))
     emoji-list ; Return value
     ))
@@ -72,7 +72,16 @@ is supposed to be used with ivy-emoji--create-list."
 
 ;; Create list of emojis using the ranges in the codepoints
 (defconst ivy-emoji-list (ivy-emoji--create-list)
-  "Cached list of propertized emojis.")
+  "Cached list of propertized emojis.
+The format is:
+...
+🌵 :cactus:
+🍝 :spaghetti:
+...
+The emoji character will be selected as substring and inserted by
+ivy-emoji--insert-emoji.
+"
+  )
 
 ;;;###autoload
 (defun ivy-emoji ()
