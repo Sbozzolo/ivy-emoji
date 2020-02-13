@@ -22,6 +22,12 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+;;; Commentary:
+
+;; I will write this later
+
+;;; Code:
+
 (require 'ivy)
 
 ;; The idea of generating the list from codepoint ranges is taken from the
@@ -29,48 +35,41 @@
 (defconst ivy-emoji-codepoint-ranges
   '((#x1f000 . #x1f9ff))
   "A list of codepoint ranges (inclusive) that is used to
-generate the list of emoji."
-  )
+generate the list of emoji.")
 
 (defun ivy-emoji---clean-name (name)
   "Convert NAME to the string that should be shown.
 E.g. convert spaces to -, surround with :."
-  (concat ":" (replace-regexp-in-string " " "-" (downcase name)) ":")
-  )
+  (concat ":" (replace-regexp-in-string " " "-" (downcase name)) ":"))
 
 (defun ivy-emoji--create-list ()
   "Create list of emojis with the emoji as first character.
 This is done by parsing the codepoint ranges.
 
-This function is used to produce ivy-emojis.
+This function is used to produce the constant ivy-emojis.
 "
   (let (emoji-list)
-    (dolist (range ivy-emoji-codepoint-ranges) ;; In case there are multiple ranges
-      (dotimes (i (- (cdr range) (car range))) ;; Loop over the codepoints in the range
+    (dolist (range ivy-emoji-codepoint-ranges) ; Loop over different ranges
+      (dotimes (i (- (cdr range) (car range))) ; Loop over the codepoints in the range
         (let ((codepoint (+ (car range) i)))
           (let* ((name (get-char-code-property codepoint 'name))
-                 (emoji (with-temp-buffer (insert codepoint) (buffer-substring 1 2)))
-                 )
-            (if name                       ; name could be nil
+                 (emoji (with-temp-buffer (insert codepoint) (buffer-substring 1 2))))
+            (if name                    ; If the emoji is not available
+                                        ; name would be nil
+                                        ; Those emoji should not be included
                 (add-to-list 'emoji-list
-                             (concat emoji " " (ivy-emoji---clean-name name))
-                             )
-              ;; In case the emoji is not available
-              (add-to-list 'emoji-list (concat emoji "NAME NOT AVAILABLE"))
-              )
-            )
-          )
-        )
-      )
+                             ; The way we want to format emoji is the following
+                             ; 🌵 :cactus:
+                             ; We will insert the emoji by taking the first character
+                             ; of this string
+                             (concat emoji " " (ivy-emoji---clean-name name))))))))
     emoji-list ; Return value
-    )
-  )
+    ))
 
 (defun ivy-emoji--insert-emoji (emoji)
   "Insert emoji by extracting the first character. This function
-   is supposed to be used with ivy-emoji--create-list"
-  (insert (substring emoji 0 1))
-  )
+is supposed to be used with ivy-emoji--create-list."
+  (insert (substring emoji 0 1)))
 
 ;; Create list of emojis using the ranges in the codepoints
 (defconst ivy-emojis (ivy-emoji--create-list)
@@ -83,9 +82,7 @@ This function is used to produce ivy-emojis.
   (ivy-read "Emoji: "
             ivy-emojis
             :require-match t
-            :action #'ivy-emoji--insert-emoji
-            )
-  )
+            :action #'ivy-emoji--insert-emoji))
 
 (provide 'ivy-emoji)
 
