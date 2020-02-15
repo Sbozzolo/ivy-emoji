@@ -5,8 +5,8 @@
 ;; Author: Gabriele Bozzola <sbozzolator@gmail.com>
 ;; URL: https://github.com/sbozzolo/ivy-emoji.git
 ;; Version: 0.1
-;; Package-Requires: ((ivy "0.13.0"))
-;; Keywords: emoji ivy
+;; Package-Requires: ((emacs "24") (ivy "0.13.0"))
+;; Keywords: emoji ivy convenience
 ;; Prefix: ivy-emoji
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -88,8 +88,7 @@ The format is:
 ...
 The emoji character will be selected as substring and inserted by
 ivy-emoji--insert-emoji.
-"
-  )
+")
 
 ;;;###autoload
 (defun ivy-emoji ()
