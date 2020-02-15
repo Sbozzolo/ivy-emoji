@@ -64,12 +64,12 @@ This function is used to produce the constant ivy-emoji-list."
             (if name                    ; If the emoji is not available
                                         ; name would be nil
                                         ; Those emoji should not be included
-                (add-to-list 'emoji-list
+                (setq emoji-list (append emoji-list
                                         ; The way we want to format emoji is the
                                         ; following 🌵 :cactus:
                                         ; We will insert the emoji by taking the
                                         ; first character of this string
-                             (concat emoji " " (ivy-emoji---clean-name name))))))))
+                     (list (concat emoji " " (ivy-emoji---clean-name name))))))))))
     emoji-list ; Return value
     ))
 
