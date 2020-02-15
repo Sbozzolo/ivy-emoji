@@ -14,6 +14,15 @@ way:
 )
 ```
 
+`ivy-emoji` produces the list of all the emojis by scanning ranges of
+codepoints. A codepoint is an object of the form `#x1f000` which corresponds to
+an unicode symbol (U+1F000). The unicode numbers corresponding to all the emojis
+can be found [here](https://unicode.org/emoji/charts/full-emoji-list.html). The
+variable `ivy-emoji-codepoint-ranges` takes a list of ranges that have to be
+scanned. In case some emoji are missing, make sure that their unicode number is
+in one the ranges analyzed by `ivy-emoji`. If they are not, modify the
+`ivy-emoji-codepoint-ranges` variable.
+
 ### Dependencies
 
 Emacs has to be able to properly render emojis, so a suitable font is required.
