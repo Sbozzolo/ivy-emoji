@@ -42,8 +42,7 @@
 ;; no-emoji package
 (defconst ivy-emoji-codepoint-ranges
   '((#x1f000 . #x1f9ff))
-  "A list of codepoint ranges (inclusive) that is used to
-generate the list of emoji.")
+  "List of codepoint ranges (inclusive) corresponding to all the emojis.")
 
 (defun ivy-emoji---clean-name (name)
   "Convert NAME to the string that should be shown.
@@ -54,7 +53,7 @@ E.g. convert spaces to -, surround with :."
   "Create list of emojis with the emoji as first character.
 This is done by parsing the codepoint ranges.
 
-This function is used to produce the constant ivy-emoji-list."
+This function is used to produce the constant `ivy-emoji-list'."
   (let (emoji-list)
     (dolist (range ivy-emoji-codepoint-ranges) ; Loop over different ranges
       (dotimes (i (- (cdr range) (car range))) ; Loop over the codepoints in the range
@@ -74,21 +73,23 @@ This function is used to produce the constant ivy-emoji-list."
     ))
 
 (defun ivy-emoji--insert-emoji (emoji)
-  "Insert emoji by extracting the first character. This function
-is supposed to be used with ivy-emoji--create-list."
+  "Insert EMOJI by extracting the first character.
+
+This function is supposed to be used with
+`ivy-emoji--create-list'."
   (insert (substring emoji 0 1)))
 
 ;; Create list of emojis using the ranges in the codepoints
 (defconst ivy-emoji-list (ivy-emoji--create-list)
   "Cached list of propertized emojis.
+
 The format is:
 ...
 🌵 :cactus:
 🍝 :spaghetti:
 ...
 The emoji character will be selected as substring and inserted by
-ivy-emoji--insert-emoji.
-")
+`ivy-emoji--insert-emoji'.")
 
 ;;;###autoload
 (defun ivy-emoji ()
