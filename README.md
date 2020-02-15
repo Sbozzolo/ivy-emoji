@@ -16,7 +16,7 @@ way:
 
 ### Dependencies
 
-Emacs has to be able to properly render emojis, but a suitable font is required.
+Emacs has to be able to properly render emojis, so a suitable font is required.
 Noto Color Emoji is reccomended for optimal results. It may be useful to add the
 following line to the configuration file to ensure that Noto Color Emoji is
 chosen to render emojis.
