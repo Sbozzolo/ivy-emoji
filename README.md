@@ -38,10 +38,10 @@ Or, to use the ones in [https://github.com/dunn/company-emoji](company-emoji):
 ```emacs-lisp
 (require 'company-emoji-list)
 (setq ivy-emoji-list
-     (mapcar '(lambda (arg)
+     (mapcar '(lambda (emoji)
                 (concat
-                 (get-text-property 0 :unicode arg) " "
-                 (substring-no-properties arg)))     ;; Print the name
+                 (get-text-property 0 :unicode emoji) " "
+                 (substring-no-properties emoji)))     ;; Print the name
              (company-emoji-list-create)))
 ```
 
