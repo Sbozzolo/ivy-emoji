@@ -23,6 +23,30 @@ scanned. In case some emoji are missing, make sure that their unicode number is
 in one the ranges analyzed by `ivy-emoji`. If they are not, modify the
 `ivy-emoji-codepoint-ranges` variable.
 
+Alternatively, you can use the list of emojis provided by other packages. For
+example, to use the emojis defined by
+[https://github.com/zevlg/telega.el](telega.el):
+``` emacs-lisp
+(require 'telega-util)
+(telega-emoji-init)
+(setq ivy-emoji-list
+      (mapcar (lambda (emoji)
+               (concat (cdr emoji) " " (car emoji)))
+               telega-emoji-alist))
+```
+Or, to use the ones in [https://github.com/dunn/company-emoji](company-emoji):
+```emacs-lisp
+(require 'company-emoji-list)
+(setq ivy-emoji-list
+     (mapcar '(lambda (arg)
+                (concat
+                 (get-text-property 0 :unicode arg) " "
+                 (substring-no-properties arg)))     ;; Print the name
+             (company-emoji-list-create)))
+```
+
+The format has to be "EMOJI NAME", for example "🌵 :cactus:".
+
 ### Dependencies
 
 Emacs has to be able to properly render emojis, so a suitable font is required.
