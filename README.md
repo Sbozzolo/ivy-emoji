@@ -45,7 +45,7 @@ Or, to use the ones in [https://github.com/dunn/company-emoji](company-emoji):
              (company-emoji-list-create)))
 ```
 
-The format has to be "EMOJI NAME", for example "🌵 :cactus:".
+The format has to be "EMOJI NAME", for example "🌵 CACTUS".
 
 ### Dependencies
 
