@@ -34,7 +34,7 @@
 ;; (set-fontset-font t 'symbol
 ;;                      (font-spec :family "Noto Color Emoji") nil 'prepend)
 
-;;; code:
+;;; Code:
 
 (require 'ivy)
 
