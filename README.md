@@ -1,3 +1,5 @@
+![CI](https://github.com/Sbozzolo/ivy-emoji/workflows/CI/badge.svg)
+
 # ivy-emoji
 
 Insert emoji in Emacs buffers using the ivy selection framework.
