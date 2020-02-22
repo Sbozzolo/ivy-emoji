@@ -14,9 +14,9 @@ way:
 )
 ```
 
-`ivy-emoji` produces the list of all the emojis by scanning ranges of
-codepoints. A codepoint is an object of the form `#x1f000` which corresponds to
-an unicode symbol (U+1F000). The unicode numbers corresponding to all the emojis
+`ivy-emoji` produces the list of all the emojis by scanning ranges of code
+points. A code point is an object of the form `#x1f000` which corresponds to an
+unicode symbol (U+1F000). The unicode numbers corresponding to all the emojis
 can be found [here](https://unicode.org/emoji/charts/full-emoji-list.html). The
 variable `ivy-emoji-codepoint-ranges` takes a list of ranges that have to be
 scanned. In case some emoji are missing, make sure that their unicode number is

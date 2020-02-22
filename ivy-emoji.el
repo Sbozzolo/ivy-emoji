@@ -38,11 +38,11 @@
 
 (require 'ivy)
 
-;; The idea of generating the list from codepoint ranges is taken from the
+;; The idea of generating the list from code point ranges is taken from the
 ;; no-emoji package
 (defconst ivy-emoji-codepoint-ranges
   '((#x1f000 . #x1f9ff))
-  "List of codepoint ranges (inclusive) corresponding to all the emojis.")
+  "List of code point ranges (inclusive) corresponding to all the emojis.")
 
 (defun ivy-emoji--clean-name (name)
   "Convert NAME to the string that should be shown.
@@ -51,12 +51,12 @@ E.g. convert spaces to -, surround with :."
 
 (defun ivy-emoji--create-list ()
   "Create list of emojis with the emoji as first character.
-This is done by parsing the codepoint ranges.
+This is done by parsing the code point ranges.
 
 This function is used to produce the constant `ivy-emoji-list'."
   (let (emoji-list)
     (dolist (range ivy-emoji-codepoint-ranges) ; Loop over different ranges
-      (dotimes (i (- (cdr range) (car range))) ; Loop over the codepoints in the range
+      (dotimes (i (- (cdr range) (car range))) ; Loop over the code points in the range
         (let ((codepoint (+ (car range) i)))
           (let* ((name (get-char-code-property codepoint 'name))
                  (emoji (with-temp-buffer (insert codepoint) (buffer-substring 1 2))))
@@ -81,9 +81,9 @@ This function is supposed to be used with
 `ivy-emoji--create-list'."
   (insert (substring emoji 0 1)))
 
-;; Create list of emojis using the ranges in the codepoints
+;; Create list of emojis using the ranges in the code points
 (defconst ivy-emoji-list (ivy-emoji--create-list)
-  "Cached list of propertized emojis.
+  "Cached list of emojis with their name.
 
 The format is:
 ...
