@@ -44,7 +44,7 @@
   '((#x1f000 . #x1f9ff))
   "List of codepoint ranges (inclusive) corresponding to all the emojis.")
 
-(defun ivy-emoji---clean-name (name)
+(defun ivy-emoji--clean-name (name)
   "Convert NAME to the string that should be shown.
 E.g. convert spaces to -, surround with :."
   (concat ":" (replace-regexp-in-string " " "-" (downcase name)) ":"))
@@ -68,7 +68,9 @@ This function is used to produce the constant `ivy-emoji-list'."
                                         ; following 🌵 :cactus:
                                         ; We will insert the emoji by taking the
                                         ; first character of this string
-                     (list (concat emoji " " (ivy-emoji---clean-name name))))))))))
+                                         (list
+                                          (concat emoji " "
+                                                  (ivy-emoji--clean-name name))))))))))
     emoji-list ; Return value
     ))
 
