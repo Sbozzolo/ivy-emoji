@@ -27,7 +27,7 @@ in one the ranges analyzed by `ivy-emoji`. If they are not, modify the
 
 Alternatively, you can use the list of emojis provided by other packages. For
 example, to use the emojis defined by
-[https://github.com/zevlg/telega.el](telega.el):
+[telega.el](https://github.com/zevlg/telega.el):
 ``` emacs-lisp
 (require 'telega-util)
 (telega-emoji-init)
@@ -36,7 +36,7 @@ example, to use the emojis defined by
                (concat (cdr emoji) " " (car emoji)))
                telega-emoji-alist))
 ```
-Or, to use the ones in [https://github.com/dunn/company-emoji](company-emoji):
+Or, to use the ones in [company-emoji](https://github.com/dunn/company-emoji):
 ```emacs-lisp
 (require 'company-emoji-list)
 (setq ivy-emoji-list
