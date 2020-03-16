@@ -4,8 +4,8 @@
 
 ;; Author: Gabriele Bozzola <sbozzolator@gmail.com>
 ;; URL: https://github.com/sbozzolo/ivy-emoji.git
-;; Version: 0.1
-;; Package-Requires: ((emacs "24") (ivy "0.13.0"))
+;; Version: 0.2
+;; Package-Requires: ((emacs "26.1") (ivy "0.13.0"))
 ;; Keywords: emoji ivy convenience
 ;; Prefix: ivy-emoji
 
@@ -20,7 +20,7 @@
 ;; GNU General Public License for more details.
 
 ;; You should have received a copy of the GNU General Public License
-;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ;;; Commentary:
 
@@ -57,22 +57,19 @@ This function is used to produce the constant `ivy-emoji-list'."
   (let (emoji-list)
     (dolist (range ivy-emoji-codepoint-ranges) ; Loop over different ranges
       (dotimes (i (- (cdr range) (car range))) ; Loop over the code points in the range
-        (let ((codepoint (+ (car range) i)))
-          (let* ((name (get-char-code-property codepoint 'name))
-                 (emoji (with-temp-buffer (insert codepoint) (buffer-substring 1 2))))
-            (if name                    ; If the emoji is not available
+        (let* ((codepoint (+ (car range) i))
+               (name (get-char-code-property codepoint 'name)))
+          (when name                    ; If the emoji is not available
                                         ; name would be nil
                                         ; Those emoji should not be included
-                (setq emoji-list (append emoji-list
-                                        ; The way we want to format emoji is the
-                                        ; following 🌵 :cactus:
-                                        ; We will insert the emoji by taking the
-                                        ; first character of this string
-                                         (list
-                                          (concat emoji " "
-                                                  (ivy-emoji--clean-name name))))))))))
-    emoji-list ; Return value
-    ))
+            (setq emoji-list
+                  (append emoji-list
+                                        ; The way we want to format emoji is the following:
+                                        ; 🌵 :cactus:
+                          (list (format "%s %s"
+                                        (char-to-string (char-from-name name))
+                                        (ivy-emoji--clean-name name)))))))))
+    emoji-list))
 
 (defun ivy-emoji--insert-emoji (emoji)
   "Insert EMOJI by extracting the first character.
