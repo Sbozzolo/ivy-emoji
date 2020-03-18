@@ -66,3 +66,17 @@ Just run `ivy-emoji`, the minibuffer will populate with all the available emoji
 (see screenshot), the one you select will be insert at the point.
 
 ![screenshot](ss.png "ivy-emoji")
+
+## Similar packages
+
+* [company-emoji](https://github.com/dunn/company-emoji): This package uses
+  [company](https://github.com/company-mode/company-mode) to insert unicode
+  emoji by typing directly in the buffer. `company-emoji` requires
+  `company-mode` and its emoji list cannot be (easily) modified.
+
+* [emacs-emojify](https://github.com/iqbalansari/emacs-emojify): This packages
+  substitutes emoji names with the corresponding images (and hence, it does not
+  require a font with emoji). `emojify` provides a command similar to
+  `ivy-emoji`: `emojify-insert-emoji`. However, this does not really insert
+  unicode emojis, but it insert text that is rendered as a picture emoji when
+  `emojify-mode` is enabled.
