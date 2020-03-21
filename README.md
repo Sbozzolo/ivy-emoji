@@ -1,12 +1,15 @@
 ![CI](https://github.com/Sbozzolo/ivy-emoji/workflows/CI/badge.svg)
+[![MELPA](https://melpa.org/packages/ivy-emoji-badge.svg)](https://melpa.org/#/ivy-emoji)
 
 # ivy-emoji
 
-Insert emoji in Emacs buffers using the ivy selection framework.
+Insert emoji in Emacs buffers using the [ivy](https://github.com/abo-abo/swiper)
+selection framework.
 
 ## Installation
 
-To install `ivy-emoji`, clone this repo and add the path to your
+The recommended way to install `ivy-emoji` is by using [MELPA](https://melpa.org/).
+Alternatively, clone this repo and add the path to your
 `load-path` variable. Using `use-package`, this can be done in the following
 way:
 ``` emacs-lisp
