@@ -41,7 +41,7 @@
 ;; The idea of generating the list from code point ranges is taken from the
 ;; no-emoji package
 (defconst ivy-emoji-codepoint-ranges
-  '((#x1f000 . #x1f9ff))
+  '((#x1f000 . #x1f9ff) (#x2600 . #x27bf))
   "List of code point ranges (inclusive) corresponding to all the emojis.")
 
 (defun ivy-emoji--clean-name (name)
